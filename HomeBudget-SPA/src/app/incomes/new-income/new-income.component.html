@@ -1,0 +1,35 @@
+<div class="container mt-4">
+  <div class="row">
+    
+    <div class="col-sm-8">
+      <div class="alert alert-info" *ngIf="editForm.dirty">
+        <strong>Information:</strong> You have made changes. Any unsaved changes will be lost!
+      </div>
+    </div>
+
+    <div class="col-sm-8">
+    
+       <h2>Add new income</h2>
+            <form #editForm="ngForm" id="editForm" (ngSubmit)="newIncome()">
+              <h5>Category</h5>
+              <div class="form-group">
+                <select class="form-control" id="selectCategory"  [(ngModel)]="income.category" [ngModelOptions]="{standalone: true}">
+                  <option *ngFor="let category of categories">{{category}}</option>
+                </select>
+              </div>
+              <h5 class="mt-3">Description</h5>
+              <textarea name="description" rows="2" class="form-control" [(ngModel)]="income.description"></textarea>
+              <h5 class="mt-3">Source</h5>
+              <textarea name="shop" rows="1" class="form-control" [(ngModel)]="income.source"></textarea>
+              <h5 class="mt-3">Amount</h5>
+              <input type="number" name="cost" class="form-control" rows="1" [(ngModel)]="income.amount">
+              <button type="submit" class="btn btn-success mr-2 ml-2 mt-4" [disabled]="!editForm.dirty">Submit</button>
+              <button type="button" class="btn btn-danger mt-4" (click)="cancel()">Cancel</button>
+            </form>
+       
+    
+      
+    </div>
+  </div>
+</div>
+

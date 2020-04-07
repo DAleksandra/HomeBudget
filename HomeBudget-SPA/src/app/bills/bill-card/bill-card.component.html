@@ -1,0 +1,25 @@
+<div class="card border-primary mb-3" style="max-width: 20rem;">
+  <div class="card-header">{{bill.description}}, {{bill.dateAdded | date:'shortDate'}}</div>
+  <div class="card-body">
+    <img class="card-img-top" src="{{bill.url}}" (click)="openCarousel()"/>
+    <ul class="list-inline member-icons animate text-center mt-2">
+      <li class="list-inline-item"><button class="btn btn-primary"><i class="fa fa-trash" (click)="remove()"></i></button></li>
+      <li class="list-inline-item"><button class="btn btn-primary"><i class="fa fa-edit" (click)="edit(template)"></i></button></li>
+    </ul>
+  </div>
+</div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Edit description</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #editForm="ngForm" id="editForm" (ngSubmit)="update()">
+      <textarea name="shop" rows="1" class="form-control" [(ngModel)]="bill.description"></textarea>
+      <button type="submit" class="btn btn-success mr-2 ml-2 mt-4" [disabled]="!editForm.dirty">Submit</button>
+    </form>
+  </div>
+</ng-template>

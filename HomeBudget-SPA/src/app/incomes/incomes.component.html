@@ -1,0 +1,62 @@
+<div class="container mt-5">
+  <h1 class="mb-3">Incomes</h1>
+  <hr>
+  <div class="row">
+    <div class="mr-2">
+      <p>Start date:</p>
+    </div>
+    <div class="form-group mr-2">
+      <input type="text"
+             class="form-control"
+             #dp="bsDatepicker"
+             [(ngModel)]="firstDay"
+             bsDatepicker
+             [bsValue]="firstDay">
+    </div>
+    <div class="mr-2">
+      <p>End date:</p>
+    </div>
+    <div class="form-group mr-2">
+      <input type="text"
+             class="form-control"
+             #dp="bsDatepicker"
+             [(ngModel)]="lastDay"
+             bsDatepicker
+             [bsValue]="lastDay">
+    </div>
+    <div>
+      <button class="btn btn-primary" (click)="load()">Filter</button>
+    </div>
+  </div>
+  <button type="button" class="btn btn-primary mb-3" [routerLink]="['/incomes/new']">Add new</button>
+  <h4>Sum: {{incomesSum}}</h4>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Category</th>
+        <th scope="col">Description</th>
+        <th scope="col">Source</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-default" *ngFor="let income of incomesArray" (click)="loadEdit(income.id)">
+        <th scope="row">{{income.category}}</th>
+        <td>{{income.description}}</td>
+        <td>{{income.source}}</td>
+        <td>{{income.amount}}</td>
+        <td>{{income.dateAdded | date:'shortDate'}}</td>
+      </tr>
+    </tbody>
+  </table> 
+
+  <div class="spinner-wrapper" *ngIf="showSpinner">
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+</div>
+
